@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Globalia clothing</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<!--
+
+TemplateMo 546 Sixteen Clothing
+
+https://templatemo.com/tm-546-sixteen-clothing
+
+-->
+
+     <!-- Additional CSS Files -->
+    {% comment %} <link rel="stylesheet" href="assets/css/fontawesome.css"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+
+    {% comment %} <link rel="stylesheet" href="assets/css/templatemo-sixteen.css"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'assets/css/templatemo-sixteen.css' %}">
+
+    {% comment %} <link rel="stylesheet" href="assets/css/owl.css"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <style>
+      .cart-button {
+    background-color: #808080;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .23), inset 1px 1px 0 0 hsla(0, 0%, 100%, .2);
+    padding: 10px 0;
+    text-align: center;
+    height: 41px;
+    border-radius: 2px;
+    font-weight: 500;
+    width: 120px;
+    display: inline-block;
+    color: #FFFFFF;
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    outline: none
+}
+
+.cart-button:hover {
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer
+}
+
+.cart-svg {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 8px
+}
+
+
+
+    </style>
+  </head>
+
+  <body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+
+    <!-- Header -->
+    <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container" >
+          <a class="navbar-brand" href="{% url 'home' %}"><h2>Globalia <em>Clothing</em></h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home' %}">Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li> 
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'products' %}">Our Products</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Categories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                {% for category in categories%}
+                <a class="dropdown-item" href="/category/{{category.id}}">{{category.name}}</a>
+                {% endfor %}
+              </div>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'about' %}">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+              </li>
+              {% if request.user.is_authenticated %}
+                  <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}"> Logout</a>
+              </li>
+              <div class="cart1 largenav col-sm-2"> <a class="cart-button" href="/cart"> <svg class="cart-svg " width="16 " height="16 " viewBox="0 0 16 16 ">
+                <path d="M15.32 2.405H4.887C3 2.405 2.46.805 2.46.805L2.257.21C2.208.085 2.083 0 1.946 0H.336C.1 0-.064.24.024.46l.644 1.945L3.11 9.767c.047.137.175.23.32.23h8.418l-.493 1.958H3.768l.002.003c-.017 0-.033-.003-.05-.003-1.06 0-1.92.86-1.92 1.92s.86 1.92 1.92 1.92c.99 0 1.805-.75 1.91-1.712l5.55.076c.12.922.91 1.636 1.867 1.636 1.04 0 1.885-.844 1.885-1.885 0-.866-.584-1.593-1.38-1.814l2.423-8.832c.12-.433-.206-.86-.655-.86 " fill="#fff "></path>
+            </svg> Cart <span class="item-number ">{{ product_count_in_cart }}</span> </a> </div>
+
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'reg' %}">Registration</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+            
+            
+            <!-- <form action="/search" method="get">
+              {% csrf_token %}
+              <div class="form-group">
+                 <span> <input type="text" class="form-control" name="search" id="search exampleInputPassword1" placeholder="Search a Product">
+                 </span>
+                <span>
+              <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+              </span></div>
+            </form> -->
+
+
+
+             </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+
+{% block content %}
+{% endblock content %}
+
+
+
+<footer style='    padding-top: 328px;'> 
+      <div class="container" >
+        <div class="row">
+          <div class="col-md-12">
+            <div class="inner-content">
+              <p>Copyright &copy; 2020 Globalia Clothing Co., Ltd.
+            
+            - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript -->
+    {% comment %} <script src="vendor/jquery/jquery.min.js"></script> {% endcomment %}
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
+    {% comment %} <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> {% endcomment %}
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+
+    <!-- Additional Scripts -->
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+    
+    <script src="{% static 'assets/js/owl.js' %}"></script>
+
+    <script src="{% static 'assets/js/slick.js' %}"></script>
+
+    <script src="{% static 'assets/js/isotope.js' %}"></script>
+
+    <script src="{% static 'assets/js/accordions.js' %}"></script>
+
+
+    <script language = "text/Javascript"> 
+      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      function clearField(t){                   //declaring the array outside of the
+      if(! cleared[t.id]){                      // function makes it static and global
+          cleared[t.id] = 1;  // you could use true and false, but that's more typing
+          t.value='';         // with more chance of typos
+          t.style.color='#fff';
+          }
+      }
+    </script>
+    </body>
+
+
+</html>

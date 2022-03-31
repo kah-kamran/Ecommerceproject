@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-sm-12" >
+        
+   
+        <form action="" method="POST" novalidate style="margin-top: 58px; padding: 63px; margin-left: 290px; margin-right: 313px;">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-success" value="Add" style="    margin-top: 17px;"> 
+        </form>
+    
+      
+
+        {% if messages %}
+            {% for message in messages %}
+            <p style="    margin-left: 352px;
+    margin-right: 369px;" {% if message.tags %} class="alert alert-{{message.tags}} mb-5 {% endif %}" > {{message}}</p>
+            {% endfor %}
+            {% endif %}
+        <br>
+        <br>
+
+
+    </div>
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <p class="alert alert-danger my-3">{{error}}</p>
+        {% endfor %}
+        {% endif %}
+
+</div>
+{% endblock content %}

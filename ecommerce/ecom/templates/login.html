@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col-sm-10">
+<h2 class="font-weight-bold mt-3" style=" padding-left: 354px;   padding-top: 130px;">Login</h2>
+    
+    <form action="" method="POST" novalidate style="padding: 63px; margin-left: 291px; padding-top: 116px;">
+        {% csrf_token %}
+        {% for fm in form %}
+        <div class="form-group">
+            {{fm.label_tag}}  {{fm}}  <small class="text-warning">{{fm.errors|striptags}}</small>
+        </div>
+        {% endfor %}
+  
+        <br><br>
+
+        <input type="submit" class="btn btn-primary" value="Submit">
+        
+        {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+        <p class="alert alert-danger my-3">{{error}}</p>
+        {% endfor %}
+        {% endif %}
+
+    </form>
+    <a href="{% url 'password_reset' %}">
+                <span>
+                 <span class="txt"> <button style=    "margin-left: 355px;"> Forgot Password </button></span>
+                </span>
+              </a>
+     
+
+</div>
+
+
+
+{% endblock content %}

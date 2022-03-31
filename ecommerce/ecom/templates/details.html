@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div style="padding: 64px;
+    text-align: center";>
+    <a href="#"><img src="/media/{{img.product_image}}" alt=""></a>
+    <a href="#"><h4 style="    font-size: 51px;">{{ img.name }}</h4></a>
+                <h6 style="    font-size: 23px;">{{img.price}}</h6>
+                <p> {{img.description}}</p>
+                
+                <a href="{% url 'add-to-cart' img.id  %}">
+                <span>
+                 <span> <button style="    margin-top: 34px;"> Add in cart </button></span>
+                </span>
+              </a>
+        
+  </div>
+
+
+{% endblock content %}

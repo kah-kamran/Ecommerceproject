@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+    <!-- Page Content -->
+    <div class="page-heading products-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>new arrivals</h4>
+              <h2>Globalia products</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="products">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="filters">
+              <ul>
+                  <li class="active" data-filter="*">All Products</li>
+                  <li data-filter=".des">Featured</li>
+                  <li data-filter=".dev">Flash Deals</li>
+                  <li data-filter=".gra">Last Minute</li>
+              </ul>
+            </div>
+
+
+
+
+          </div>
+
+
+
+
+
+
+
+          <br>
+
+ {% for image in img %}
+          <div class="col-md-4" style="padding-top: 121px; text-align:center">
+            <div class="product-item">
+              <div style="width: 350px; height:250px;">
+                <a href="{% url 'productdetail' image.id %}"><img style="" src="/media/{{image.product_image}}" alt=""></a>
+              </div>
+              <div style="    margin-top: 76px;" class="down-content">
+                
+                <a href="{% url 'productdetail' image.id %}"><h4>{{ image.name }}</h4></a>
+               
+                <h6>{{image.price}}</h6>
+                <p> {{image.description}}</p>               
+                <ul class="stars">
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                  <li><i class="fa fa-star"></i></li>
+                </ul>
+                
+              </div>
+              <a class="filled-button" href="{% url 'add-to-cart' image.id  %}">
+                Add to Cart
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+
+        
+          </div>
+        </div>
+      </div>
+
+
+
+<div>
+      {% if img.has_other_pages %}
+  <ul class="pagination" style="    padding-left: 764px;">
+    {% if img.has_previous %}
+      <li><a href="?page={{ img.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in img.paginator.page_range %}
+      {% if img.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if img.has_next %}
+      <li><a href="?page={{ img.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+</div>
+
+
+    </div>
+
+    
+
+  {% endblock content %} 
